@@ -18,7 +18,7 @@ public class RegistrationAndLogin {
 
     Scanner input = new Scanner(System.in);
 
-        System.out.println("Registration");
+        System.out.println("REGISTRATION");
     System.out.println("Enter your username");
         String userName = input.nextLine();
         System.out.println("Enter your password");
