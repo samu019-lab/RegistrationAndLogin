@@ -26,6 +26,7 @@ class Login {
         this.lastName = lastName;
         this.loginStatus = false;
     }
+    // check user name 
     public boolean checkUserName(){
     if (userName.contains("_") & userName.length()<=5){
         return true;
