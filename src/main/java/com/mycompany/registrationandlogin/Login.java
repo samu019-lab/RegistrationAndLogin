@@ -17,7 +17,7 @@ class Login {
     public String lastName;
     public boolean loginStatus;
     
-    //constructor
+    //CONSTRUCTOR
     public Login(String userName,String password,String cellPhoneNumber,String firstName,String lastName){
         this.userName = userName;
         this.password = password;
