@@ -33,7 +33,7 @@ public class RegistrationAndLogin {
     Login login = new Login(userName,password,cellPhoneNumber,firstName,lastName);
         System.out.println(login.registerUser("User successfully registerd."));
         
-        System.out.println("Login");
+        System.out.println("LOGIN");
         System.out.println("Enter your username");
         String enteredUserName = input.nextLine();
         System.out.println("Enter your password");
