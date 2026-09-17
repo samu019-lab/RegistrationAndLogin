@@ -36,7 +36,7 @@ public class RegistrationAndLogin {
         System.out.println("LOGIN");
         System.out.println("Enter your username to login");
         String enteredUserName = input.nextLine();
-        System.out.println("Enter your password");
+        System.out.println("Enter your password to login");
         String enteredpassword = input.nextLine();
         
         login.loginUser(enteredUserName, enteredpassword);
