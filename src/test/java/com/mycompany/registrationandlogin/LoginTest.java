@@ -12,6 +12,18 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author Samukelisiwe
  */
 public class LoginTest {
+      
     
-    
+    @Test
+     public void testCheckUserNameValid() {
+
+        Login login = new Login(
+                "kyl_1",
+                "Ch&cK@ke99!",
+                "+27838968976",
+                "Samukelisiwe",
+                "Hlophe");   
+        assertTrue(login.checkUserName());
+     }
+
 }
