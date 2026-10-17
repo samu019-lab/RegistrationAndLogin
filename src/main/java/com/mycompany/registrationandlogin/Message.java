@@ -236,7 +236,7 @@ class Message {
             System.out.println("No sent messages available.");
             return;
         }
-
+// a while loop
         while (current != null) {
             Message currentMessage = current.data;
 
