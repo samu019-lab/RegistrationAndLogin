@@ -55,7 +55,7 @@ public class RegistrationAndLogin {
         login.loginUser(enteredUsername, enteredPassword);
 
         System.out.println(login.returnLoginStatus());
-
+// part 2 starting here
          if (!login.loginUser(enteredUsername, enteredPassword)) {
             System.out.println("Program ended.");
             scanner.close();
