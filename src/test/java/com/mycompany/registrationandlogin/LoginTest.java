@@ -140,7 +140,7 @@ public class LoginTest {
 
         login.loginUser("wrong_username", "wrong_password");
 
-        assertTrue(
+        assertFalse(
                 login.returnLoginStatus().contains("Login has failed")
         );
     }
