@@ -41,7 +41,7 @@ public class RegistrationAndLogin {
                 lastName
         );
 
-        System.out.println(login.registerUser());
+        System.out.println(login.registerUser("User successfully registered."));
 
         System.out.println();
         System.out.println("Login");

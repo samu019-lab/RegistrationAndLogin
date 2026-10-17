@@ -25,5 +25,170 @@ public class LoginTest {
                 "Hlophe");   
         assertTrue(login.checkUserName());
      }
+@Test
+    public void testCheckUserNameInvalid(){
+       
+        Login login = new Login(
+                "kyle!!!!!!",
+                "Ch&cK@ke99!",
+                "+27838968976",
+                "Samukelisiwe",
+                "Hlophe");   
+         assertFalse(login.checkUserName());
+    }
+@Test
+    public void testCheckPasswordComplexityValid(){
+        
+        Login login = new Login(
+                "kyl_1",
+                "Ch&cK@ke99!",
+                "+27838968976",
+                "Samukelisiwe",
+                "Hlophe"); 
+        assertTrue(login.checkPasswordComplexity());
+    }
+    @Test
+    public void testCheckPasswordComplexityInvalid(){
+        
+        Login login = new Login(
+                "kyl_1",
+                "samuke",
+                "+27838968976",
+                "Samukelisiwe",
+                "Hlophe"); 
+        assertFalse(login.checkPasswordComplexity());
+    }
+    @Test
+    public void testCheckCellPhoneNumberValid(){
+        
+        Login login = new Login(
+                "kyl_1",
+                "Ch&cK@ke99!",
+                "+27838968976",
+                "Samukelisiwe",
+                "Hlophe"); 
+        assertTrue(login.checkCellPhoneNumber());
+    }
+     @Test
+    public void testCheckCellPhoneNumberInvalid(){
+        
+        Login login = new Login(
+                "kyl_1",
+                "Ch&cK@ke99!",
+                "063029",
+                "Samukelisiwe",
+                "Hlophe"); 
+        assertFalse(login.checkCellPhoneNumber());
+    }
+     @Test
+    public void testLoginSuccessful() {
+
+        Login login = new Login(
+                "kyl_1",
+                "Ch&cK@ke99!",
+                "+27838968976",
+                "Samukelisiwe",
+                "Hlophe"
+        );
+
+        assertTrue(
+                login.loginUser("kyl_1", "Ch&cK@ke99!")
+        );
+    }
+
+    @Test
+    public void testLoginFailed() {
+
+        Login login = new Login(
+                "kyl_1",
+                "Ch&cK@ke99!",
+                "+27838968976",
+                "Samukelisiwe",
+                "Hlophe"
+        );
+
+        assertFalse(login.loginUser("wrong_username", "wrong_password"));
+         
+    }
+    @Test
+    public void testReturnLoginStatusSuccessful() {
+
+        Login login = new Login(
+                "kyl_1",
+                "Ch&cK@ke99!",
+                "+27838968976",
+                "Samukelisiwe",
+                "Hlophe"
+        );
+
+        login.loginUser("kyl_1", "Ch&cK@ke99!");
+
+        assertTrue(
+                login.returnLoginStatus().contains("Login successful")
+        );
+    }
+      @Test
+    public void testReturnLoginStatusFailed() {
+
+        Login login = new Login(
+                "kyl_1",
+                "Ch&cK@ke99!",
+                "+27838968976",
+                "Samukelisiwe",
+                "Hlophe"
+        );
+
+        login.loginUser("wrong_username", "wrong_password");
+
+        assertTrue(
+                login.returnLoginStatus().contains("Login has failed")
+        );
+    }
+    // 7. Test successful registration
+@Test
+public void testRegisterUserSuccessful() {
+
+    Login login = new Login(
+            "kyl_1",
+            "Ch&cK@ke99!",
+            "+27838968976",
+            "Samukelisiwe",
+            "Hlophe"
+    );
+
+    String result = login.registerUser("User successfully registered.");
+
+    assertEquals("User successfully registered.", result);
+}
+@Test
+public void testRegisterUserIncorrectUsername() {
+
+    Login login = new Login(
+            "kyle!!!!!!",
+            "Ch&cK@ke99!",
+            "+27838968976",
+            "Samukelisiwe",
+            "Hlophe"
+    );
+
+    String result = login.registerUser("User successfully registered.");
+
+    assertTrue(result.contains("Username is not correctly formatted"));
+}
+@Test
+public void testRegisterUserIncorrectPassword() {
+
+    Login login = new Login(
+            "kyl_1",
+            "password",
+            "+27838968976",
+            "Samukelisiwe",
+            "Hlophe"
+    );
+
+    String result = login.registerUser("User successfully registered.");
+
+    assertTrue(result.contains("Password is not correctly formatted"));
+}
 
 }

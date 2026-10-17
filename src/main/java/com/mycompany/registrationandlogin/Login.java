@@ -66,7 +66,7 @@ class Login {
     }
 
     // Register user
-    public String registerUser() {
+    public String registerUser(String user_successfully_registered) {
 
         if (!checkUserName()) {
 
