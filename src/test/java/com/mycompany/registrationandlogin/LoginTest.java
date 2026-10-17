@@ -191,4 +191,20 @@ public void testRegisterUserIncorrectPassword() {
     assertTrue(result.contains("Password is not correctly formatted"));
 }
 
+@Test
+public void testRegisterUserIncorrectCellPhone() {
+
+    Login login = new Login(
+            "kyl_1",
+            "Ch&cK@ke99!",
+            "08966553",
+            "Samukelisiwe",
+            "Hlophe"
+    );
+
+    String result = login.registerUser("User successfully registered.");
+
+    assertTrue(result.contains("Cell phone number is incorrectly formatted"));
+}
+
 }
