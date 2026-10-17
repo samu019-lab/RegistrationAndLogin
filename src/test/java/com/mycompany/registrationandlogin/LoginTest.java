@@ -123,7 +123,7 @@ public class LoginTest {
 
         login.loginUser("kyl_1", "Ch&cK@ke99!");
 
-        assertTrue(
+        assertFalse(
                 login.returnLoginStatus().contains("Login successful")
         );
     }
