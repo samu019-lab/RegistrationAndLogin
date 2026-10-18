@@ -5,5 +5,19 @@
   "recipient": "+27718693002",
   "message": "Hello again",
   "messageHash": "3:12:HELLO:AGAIN"
+},
+{
+  "messageID": "2282514368",
+  "messageNumber": 2,
+  "recipient": "+27630290517",
+  "message": "i love you",
+  "messageHash": "2:22:I:YOU"
+},
+{
+  "messageID": "8441492279",
+  "messageNumber": 5,
+  "recipient": "+27630290517",
+  "message": "i eye you the was a car more yes yes yes yes yes no no no i i i i i i i i i i i i i i  i i i i i iiiii i i iiiiiiiiiiiiii",
+  "messageHash": "5:84:I:IIIIIIIIIIIIII"
 }
 ]

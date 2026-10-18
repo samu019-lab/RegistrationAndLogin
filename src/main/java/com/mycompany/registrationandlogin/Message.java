@@ -141,8 +141,8 @@ public String checkCellPhoneNumber() {
     public String SentMessage(Scanner scanner) {
         System.out.println("\nChoose an option:");
         System.out.println("1. Send Message");
-        System.out.println("2. Disregard Message");
-        System.out.println("3. Store Message");
+        System.out.println("0. Disregard Message");
+        System.out.println("2. Store Message");
 
         System.out.print("Enter your choice: ");
         String choice = scanner.nextLine();

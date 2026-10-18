@@ -121,7 +121,7 @@ public class MessageTest {
     @Test
     public void testDisregardMessage() {
         Message message = new Message(
-                "1234567891", 2,
+                "1234567891", 0,
                 "+27718693002", "Hello Keegan"
         );
 
@@ -136,7 +136,7 @@ public class MessageTest {
     @Test
     public void testStoreMessage() {
         Message message = new Message(
-                "1234567892", 3,
+                "1234567892", 2,
                 "+27718693002", "Hello again"
         );
 
