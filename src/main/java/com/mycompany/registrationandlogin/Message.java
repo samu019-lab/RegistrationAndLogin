@@ -88,7 +88,30 @@ class Message {
                 && !message.trim().isEmpty()
                 && message.length() <= 250;
     }
+    public String checkMessageLength() {
+    if (message != null && !message.trim().isEmpty()
+            && message.length() <= 250) {
+        return "Message ready to send.";
+    }
 
+    if (message != null && message.length() > 250) {
+        return "Message exceeds 250 characters by "
+                + (message.length() - 250)
+                + "; please reduce the size.";
+    }
+
+    return "Message cannot be empty.";
+}
+
+public String checkCellPhoneNumber() {
+    if (checkRecipientCell()) {
+        return "Cell phone number successfully captured.";
+    }
+
+    return "Cell phone number is incorrectly formatted or does not "
+            + "contain an international code. Please correct the "
+            + "number and try again.";
+}
     public String createMessageHash() {
         String firstWord = "";
         String lastWord = "";
