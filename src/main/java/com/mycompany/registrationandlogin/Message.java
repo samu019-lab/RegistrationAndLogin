@@ -147,32 +147,34 @@ public String checkCellPhoneNumber() {
         System.out.print("Enter your choice: ");
         String choice = scanner.nextLine();
 
-        switch (choice) {
-            case "1":
-                totalMessages++;
-                addSentMessage(this);
-                System.out.println("Message sent successfully.");
-                return "Message sent";
+       switch (choice) {
+    case "1" -> {
+        totalMessages++;
+        addSentMessage(this);
+        System.out.println("Message successfully sent.");
+        return "Message successfully sent.";
+            }
 
-            case "0":
-                System.out.println("Message disregarded and deleted.");
-                return "Message disregarded";
+    case "0" -> {
+        System.out.println("Press 0 to delete the message.");
+        return "Press 0 to delete the message.";
+            }
 
-            case "3":
-                if (storeMessage()) {
-                    System.out.println(
-                            "Message stored in messages.json."
-                    );
-                    return "Message successfully stored";
-                }
-
-                System.out.println("Message could not be stored.");
-                return "Storage failed";
-
-            default:
-                System.out.println("Invalid choice.");
-                return "Invalid choice";
+    case "2" -> {
+        if (storeMessage()) {
+            System.out.println("Message successfully stored.");
+            return "Message successfully stored.";
         }
+
+        System.out.println("Message could not be stored.");
+        return "Storage failed";
+            }
+
+    default -> {
+        System.out.println("Invalid choice.");
+        return "Invalid choice";
+            }
+}
     }
 
     private static void addSentMessage(Message newMessage) {
