@@ -5,7 +5,7 @@
 package com.mycompany.registrationandlogin;
 
 import java.util.Scanner;
-
+import java.util.Random;
 /**
  *
  * @author Samukelisiwe
@@ -15,6 +15,7 @@ public class RegistrationAndLogin {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
 
         System.out.println("Registration");
 
@@ -104,14 +105,21 @@ public class RegistrationAndLogin {
                         break;
                     }
 
-                    for (int i = 0; i < numberOfMessages; i++) {
+                     for (int i = 0; i < numberOfMessages; i++) {
+
+                        System.out.println(
+                                "\nMessage " + (i + 1)
+                        );
 
                         messageNumber++;
 
+                        // Generate a random 10-digit message ID.
                         String messageID = String.valueOf(
                                 1000000000L
-                                + (long) (Math.random()
-                                * 9000000000L)
+                                + (long) (
+                                        random.nextDouble()
+                                        * 9000000000L
+                                )
                         );
 
                         System.out.print(

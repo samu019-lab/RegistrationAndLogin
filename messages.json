@@ -19,5 +19,19 @@
   "recipient": "+27630290517",
   "message": "i eye you the was a car more yes yes yes yes yes no no no i i i i i i i i i i i i i i  i i i i i iiiii i i iiiiiiiiiiiiii",
   "messageHash": "5:84:I:IIIIIIIIIIIIII"
+},
+{
+  "messageID": "1234567892",
+  "messageNumber": 2,
+  "recipient": "+27718693002",
+  "message": "Hello again",
+  "messageHash": "2:12:HELLO:AGAIN"
+},
+{
+  "messageID": "8081708194",
+  "messageNumber": 1,
+  "recipient": "+270630290517",
+  "message": "hi, want to grab dinner",
+  "messageHash": "1:80:HI,:DINNER"
 }
 ]
