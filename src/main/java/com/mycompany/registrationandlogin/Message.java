@@ -27,7 +27,7 @@ class Message {
     private static MessageNode sentHead = null;
     private static MessageNode sentTail = null;
     
-// PART 3 – Store Data and Display Task Report
+// PART 3 
 private static final int MAX_MESSAGES = 100;
 
 private static Message[] sentMessages = new Message[MAX_MESSAGES];
@@ -165,6 +165,13 @@ public String checkCellPhoneNumber() {
     case "1" -> {
         totalMessages++;
         addSentMessage(this);
+        
+       // Add sent message to array
+if (sentCount < MAX_MESSAGES) {
+    sentMessages[sentCount] = this;
+    sentCount++;
+}
+        
         System.out.println("Message successfully sent.");
         return "Message successfully sent.";
             }
