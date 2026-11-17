@@ -26,8 +26,8 @@ class Message {
     private static int totalMessages = 0;
     private static MessageNode sentHead = null;
     private static MessageNode sentTail = null;
-
-    // PART 3 
+    
+// PART 3 – Store Data and Display Task Report
 private static final int MAX_MESSAGES = 100;
 
 private static Message[] sentMessages = new Message[MAX_MESSAGES];
@@ -40,7 +40,7 @@ private static String[] messageIDs = new String[MAX_MESSAGES];
 private static int sentCount = 0;
 private static int disregardedCount = 0;
 private static int storedCount = 0;
-    
+
     private static class MessageNode {
         private Message data;
         private MessageNode next;
