@@ -167,7 +167,7 @@ public String checkCellPhoneNumber() {
         addSentMessage(this);
         
        // Add sent message to array
-if (sentCount < MAX_MESSAGES) {
+     if (sentCount < MAX_MESSAGES) {
     sentMessages[sentCount] = this;
     sentCount++;
 }
@@ -177,12 +177,23 @@ if (sentCount < MAX_MESSAGES) {
             }
 
     case "0" -> {
+        
+    if (disregardedCount < MAX_MESSAGES) {
+    disregardedMessages[disregardedCount] = this;
+    disregardedCount++;
+    }
+        
         System.out.println("Press 0 to delete the message.");
         return "Press 0 to delete the message.";
             }
 
     case "2" -> {
         if (storeMessage()) {
+            
+    if (storedCount < MAX_MESSAGES) {
+    storedMessages[storedCount] = this;
+    storedCount++;
+   }
             System.out.println("Message successfully stored.");
             return "Message successfully stored.";
         }
