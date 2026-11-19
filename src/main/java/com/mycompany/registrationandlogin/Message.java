@@ -340,6 +340,28 @@ public static void displayLongestMessage() {
     System.out.println("Message Hash: " + longestMessage.getMessageHash());
 }  
 
+ // Search for a message using Message ID
+public static void searchMessageID(String searchID) {
+
+    boolean found = false;
+
+    for (int i = 0; i < sentCount; i++) {
+
+        if (messageIDs[i].equals(searchID)) {
+
+            System.out.println("\nMessage Found!");
+            System.out.println("Recipient: "
+                    + sentMessages[i].getRecipient());
+            System.out.println("Message: "
+                    + sentMessages[i].getMessage());
+
+            found = true;
+            break;
+        }
+    }
+
+    if (!found) {
+        System.out.println("Message ID not found.");
+    }
 }
-
-
+}
