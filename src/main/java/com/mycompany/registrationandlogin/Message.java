@@ -223,6 +223,9 @@ public String checkCellPhoneNumber() {
     }
 
     public boolean storeMessage() {
+          // Generate the correct hash before storing
+    createMessageHash();
+    
         Path filePath = Paths.get("messages.json");
 
         try {
@@ -386,5 +389,57 @@ public static void searchRecipient(String searchRecipient) {
     if (!found) {
         System.out.println("No messages found for this recipient.");
     }
+}
+ // Delete a sent message using its hash
+public static void deleteMessage(String searchHash) {
+
+    for (int i = 0; i < sentCount; i++) {
+
+        if (messageHashes[i].equals(searchHash)) {
+
+            for (int j = i; j < sentCount - 1; j++) {
+                sentMessages[j] = sentMessages[j + 1];
+                messageHashes[j] = messageHashes[j + 1];
+                messageIDs[j] = messageIDs[j + 1];
+            }
+            
+            sentMessages[sentCount - 1] = null;
+            messageHashes[sentCount - 1] = null;
+            messageIDs[sentCount - 1] = null;
+
+            sentCount--;
+
+            System.out.println("Message successfully deleted.");
+            return;
+        }
+    }
+
+    System.out.println("Message hash not found.");
+}
+
+ // Display report of sent messages
+     public static void displayReport() {
+
+    System.out.println("\n===== SENT MESSAGE REPORT =====");
+
+    if (sentCount == 0) {
+        System.out.println("No sent messages available.");
+        return;
+    }
+
+    for (int i = 0; i < sentCount; i++) {
+
+        System.out.println("\nMessage " + (i + 1));
+        System.out.println("Message Hash: "
+                + sentMessages[i].getMessageHash());
+        System.out.println("Recipient: "
+                + sentMessages[i].getRecipient());
+        System.out.println("Message: "
+                + sentMessages[i].getMessage());
+        System.out.println("Message ID: "
+                + sentMessages[i].getMessageID());
+    }
+
+    System.out.println("\nTotal messages in report: " + sentCount);
 }
 }
