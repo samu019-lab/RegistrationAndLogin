@@ -33,5 +33,33 @@
   "recipient": "+270630290517",
   "message": "hi, want to grab dinner",
   "messageHash": "1:80:HI,:DINNER"
+},
+{
+  "messageID": "1234567892",
+  "messageNumber": 2,
+  "recipient": "+27718693002",
+  "message": "Hello again",
+  "messageHash": "12:2:HELLOAGAIN"
+},
+{
+  "messageID": "1234567892",
+  "messageNumber": 2,
+  "recipient": "+27718693002",
+  "message": "Hello again",
+  "messageHash": "12:2:HELLOAGAIN"
+},
+{
+  "messageID": "1234567892",
+  "messageNumber": 2,
+  "recipient": "+27718693002",
+  "message": "Hello again",
+  "messageHash": "12:2:HELLOAGAIN"
+},
+{
+  "messageID": "1234567892",
+  "messageNumber": 2,
+  "recipient": "+27718693002",
+  "message": "Hello again",
+  "messageHash": ""
 }
 ]

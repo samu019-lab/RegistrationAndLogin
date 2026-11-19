@@ -110,9 +110,7 @@ public class RegistrationAndLogin {
                         System.out.println(
                                 "\nMessage " + (i + 1)
                         );
-
-                        messageNumber++;
-
+                 
                         // Generate a random 10-digit message ID.
                         String messageID = String.valueOf(
                                 1000000000L
@@ -122,48 +120,86 @@ public class RegistrationAndLogin {
                                 )
                         );
 
-                        System.out.print(
-                                "Enter recipient cellphone number "
-                                + "(include +): "
-                        );
-                        String recipient = scanner.nextLine();
+    String recipient;
 
-                        System.out.print("Enter your message: ");
-                        String messageText = scanner.nextLine();
+    while (true) {
+        System.out.print(
+                "Enter recipient cellphone number (include +): "
+        );
+        recipient = scanner.nextLine();
 
-                        Message newMessage = new Message(
-                                messageID,
-                                messageNumber,
-                                recipient,
-                                messageText
-                        );
+        if (recipient.matches("\\+\\d{1,12}")) {
+            break;
+        }
 
-                        if (!newMessage.checkMessageID()) {
-                            System.out.println("Invalid message ID.");
-                            continue;
-                        }
+        System.out.println(
+                "Cell phone number is incorrectly formatted or does not "
+                + "contain an international code. Please correct the "
+                + "number and try again."
+        );
+    }
+    String messageText;
 
-                        if (!newMessage.checkRecipientCell()) {
-                            System.out.println(
-                                    "Invalid cellphone number."
-                            );
-                            continue;
-                        }
+    while (true) {
+        System.out.print("Enter your message: ");
+        messageText = scanner.nextLine();
 
-                        if (!newMessage.checkMessage()) {
-                            System.out.println(
-                                    "Message must be between "
-                                    + "1 and 250 characters."
-                            );
-                            continue;
-                        }
+        if (!messageText.trim().isEmpty()
+                && messageText.length() <= 250) {
+            break;
+        }
 
-                        System.out.println(
+        if (messageText.length() > 250) {
+            System.out.println(
+                    "Please enter a message of less than 250 characters."
+            );
+        } else {
+            System.out.println("Message cannot be empty.");
+        }
+    }
+    Message newMessage = new Message(
+            messageID,
+            messageNumber,
+            recipient,
+            messageText
+    );
+
+    if (!newMessage.checkMessageID()) {
+        System.out.println("Invalid message ID.");
+        continue;
+    }
+    
+                     System.out.println(
                                 "Message Hash: "
                                 + newMessage.createMessageHash()
                         );
 
-                        newMessage.SentMessage(scanner);
+                        
+
+      String messageChoice;
+
+    while (true) {
+
+    System.out.println("\nChoose an option:");
+    System.out.println("1. Send Message");
+    System.out.println("2. Disregard Message");
+    System.out.println("3. Store Message");
+
+    System.out.print("Enter your choice: ");
+    messageChoice = scanner.nextLine();
+
+    if (messageChoice.equals("1")
+            || messageChoice.equals("2")
+            || messageChoice.equals("3")) {
+        break;
+    }
+
+            System.out.println("Invalid choice. Please try again.");
+}
+
+            newMessage.SentMessage(messageChoice);
+
+                        messageNumber++;
                     }
 
                     break;

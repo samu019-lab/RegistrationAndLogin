@@ -127,39 +127,32 @@ public String checkCellPhoneNumber() {
             + "number and try again.";
 }
     public String createMessageHash() {
-        String firstWord = "";
-        String lastWord = "";
+       
         String trimmedMessage = message.trim();
+        String cleanMessage = trimmedMessage.replaceAll("[^a-zA-Z0-9\\s]", "");
+        String[] words = cleanMessage.trim().split("\\s+");
 
-        if (!trimmedMessage.isEmpty()) {
-            int firstSpace = trimmedMessage.indexOf(' ');
-            int lastSpace = trimmedMessage.lastIndexOf(' ');
+        String firstWord = words[0];
+        String lastWord = words[words.length - 1];
 
-            if (firstSpace == -1) {
-                firstWord = trimmedMessage;
-                lastWord = trimmedMessage;
-            } else {
-                firstWord = trimmedMessage.substring(0, firstSpace);
-                lastWord = trimmedMessage.substring(lastSpace + 1);
-            }
-        }
+        String firstTwoDigits = messageID.substring(0, 2);
 
-        messageHash = messageNumber + ":"
-                + messageID.substring(0, 2) + ":"
-                + firstWord.toUpperCase() + ":"
+        messageHash = firstTwoDigits + ":"
+                + messageNumber + ":"
+                + firstWord.toUpperCase()
                 + lastWord.toUpperCase();
 
         return messageHash;
     }
 
-    public String SentMessage(Scanner scanner) {
+    public String SentMessage(String choice) {
         System.out.println("\nChoose an option:");
         System.out.println("1. Send Message");
-        System.out.println("0. Disregard Message");
-        System.out.println("2. Store Message");
+        System.out.println("2. Disregard Message");
+        System.out.println("3. Store Message");
 
         System.out.print("Enter your choice: ");
-        String choice = scanner.nextLine();
+        
 
        switch (choice) {
     case "1" -> {
@@ -169,14 +162,22 @@ public String checkCellPhoneNumber() {
        // Add sent message to array
      if (sentCount < MAX_MESSAGES) {
     sentMessages[sentCount] = this;
+    messageHashes[sentCount] = messageHash;
+    messageIDs[sentCount] = messageID;
     sentCount++;
 }
         
-        System.out.println("Message successfully sent.");
-        return "Message successfully sent.";
+         
+    System.out.println("\nMessage successfully sent.");
+    System.out.println("Message ID: " + messageID);
+    System.out.println("Message Hash: " + messageHash);
+    System.out.println("Recipient: " + recipient);
+    System.out.println("Message: " + message);
+
+    return "Message successfully sent.";
             }
 
-    case "0" -> {
+    case "2" -> {
         
     if (disregardedCount < MAX_MESSAGES) {
     disregardedMessages[disregardedCount] = this;
@@ -187,7 +188,7 @@ public String checkCellPhoneNumber() {
         return "Press 0 to delete the message.";
             }
 
-    case "2" -> {
+    case "3" -> {
         if (storeMessage()) {
             
     if (storedCount < MAX_MESSAGES) {

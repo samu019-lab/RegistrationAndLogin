@@ -89,16 +89,17 @@ public class MessageTest {
         assertFalse(message.checkMessageID());
     }
 
-    @Test
+     @Test
     public void testMessageHash() {
+        
         Message message = new Message(
-                "1234567890", 1,
+                "0012345678", 0,
                 "+27718693002",
                 "Hi Mike, can you join us for dinner tonight?"
         );
 
         assertEquals(
-                "1:12:HI:TONIGHT?",
+                "00:0:HITONIGHT",
                 message.createMessageHash()
         );
     }
@@ -110,39 +111,36 @@ public class MessageTest {
                 "+27718693002", "Hello Mike"
         );
 
-        Scanner scanner = new Scanner("1\n");
-
         assertEquals(
-                "Message successfully sent.",
-                message.SentMessage(scanner)
-        );
+    "Message successfully sent.",
+    message.SentMessage("1")
+);
     }
 
-    @Test
+        @Test
     public void testDisregardMessage() {
         Message message = new Message(
-                "1234567891", 0,
+                "1234567891", 1,
                 "+27718693002", "Hello Keegan"
         );
 
-        Scanner scanner = new Scanner("0\n");
-
         assertEquals(
                 "Press 0 to delete the message.",
-                message.SentMessage(scanner)
-        );
+                message.SentMessage("2")
+                 );
     }
-
-    @Test
+    
+     @Test
     public void testStoreMessage() {
         Message message = new Message(
                 "1234567892", 2,
                 "+27718693002", "Hello again"
         );
 
-        message.createMessageHash();
-
-        assertTrue(message.storeMessage());
-    }
+        assertEquals(
+                "Message successfully stored.",
+                message.SentMessage("3")
+        );
+}
 }
 
