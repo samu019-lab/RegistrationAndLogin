@@ -364,4 +364,27 @@ public static void searchMessageID(String searchID) {
         System.out.println("Message ID not found.");
     }
 }
+ //  Search for messages sent to a recipient
+public static void searchRecipient(String searchRecipient) {
+
+    boolean found = false;
+
+    for (int i = 0; i < sentCount; i++) {
+
+        if (sentMessages[i].getRecipient().equals(searchRecipient)) {
+
+            System.out.println("\nMessage Found!");
+            System.out.println("Recipient: "
+                    + sentMessages[i].getRecipient());
+            System.out.println("Message: "
+                    + sentMessages[i].getMessage());
+
+            found = true;
+        }
+    }
+
+    if (!found) {
+        System.out.println("No messages found for this recipient.");
+    }
+}
 }
