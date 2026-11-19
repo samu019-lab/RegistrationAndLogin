@@ -184,10 +184,18 @@ public class RegistrationAndLogin {
     System.out.println("1. Send Message");
     System.out.println("2. Disregard Message");
     System.out.println("3. Store Message");
-
+    
+    // PART 3 
+    System.out.println("4. Display stored messages");
+   System.out.println("5. Display longest message");
+   System.out.println("6. Search message by ID"); 
+   System.out.println("7. Search messages by recipient"); 
+   System.out.println("8. Delete message by hash");
+   System.out.println("9. Display full message report");
+   
     System.out.print("Enter your choice: ");
     messageChoice = scanner.nextLine();
-
+ 
     if (messageChoice.equals("1")
             || messageChoice.equals("2")
             || messageChoice.equals("3")) {
@@ -217,8 +225,47 @@ public class RegistrationAndLogin {
                     System.out.println("Goodbye!");
                     running = false;
                     break;
+    
+                case "4":
+                Message.readStoredMessages();
+                break;
 
-                default:
+                case "5":
+               Message.displayLongestMessage();
+               break;
+               
+               case "6":
+              System.out.print("Enter Message ID: ");
+               String searchID = scanner.nextLine();
+
+               Message.searchMessageID(searchID);
+                 break;
+               
+               
+                case "7":
+
+                System.out.print("Enter recipient cellphone number: ");
+                String searchRecipient = scanner.nextLine();
+
+                Message.searchRecipient(searchRecipient);
+                break;
+
+               
+                case "8":
+
+                 System.out.print("Enter message hash to delete: ");
+                 String searchHash = scanner.nextLine();
+
+                 Message.deleteMessage(searchHash);
+                 break;
+
+                 
+                    case "9":
+
+                     Message.displayReport();
+                     break;
+
+                     default:
                     System.out.println(
                             "Invalid option. Please try again."
                     );
