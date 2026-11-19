@@ -9,7 +9,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Scanner;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
 /**
  *
  * @author Samukelisiwe
@@ -441,5 +442,71 @@ public static void deleteMessage(String searchHash) {
     }
 
     System.out.println("\nTotal messages in report: " + sentCount);
+}
+     
+ //Read stored messages from JSON into an array
+public static void readStoredMessages() {
+
+    Path filePath = Paths.get("messages.json");
+
+    if (!Files.exists(filePath)) {
+        System.out.println("No stored messages file found.");
+        return;
+    }
+
+    try {
+        String jsonContent = Files.readString(filePath);
+
+        Gson gson = new Gson();
+
+        Message[] loadedMessages =
+                gson.fromJson(jsonContent, Message[].class);
+
+        if (loadedMessages == null) {
+            System.out.println("No stored messages found.");
+            return;
+        }
+
+        storedMessages = new Message[MAX_MESSAGES];
+        storedCount = 0;
+
+        for (Message loadedMessage : loadedMessages) {
+
+            if (storedCount >= MAX_MESSAGES) {
+                System.out.println(
+                        "Storage array is full. Some messages were not loaded."
+                );
+                break;
+            }
+
+            if (loadedMessage != null) {
+                storedMessages[storedCount] = loadedMessage;
+                storedCount++;
+            }
+        }
+
+        System.out.println(
+                storedCount + " stored messages loaded from JSON."
+        );
+
+        // Display the loaded messages
+        for (int i = 0; i < storedCount; i++) {
+            Message current = storedMessages[i];
+
+            System.out.println("\nMessage ID: "
+                    + current.getMessageID());
+            System.out.println("Recipient: "
+                    + current.getRecipient());
+            System.out.println("Message: "
+                    + current.getMessage());
+            System.out.println("Message Hash: "
+                    + current.getMessageHash());
+        }
+
+    } catch (IOException | JsonSyntaxException e) {
+        System.out.println(
+                "Error reading stored messages: " + e.getMessage()
+        );
+    }
 }
 }

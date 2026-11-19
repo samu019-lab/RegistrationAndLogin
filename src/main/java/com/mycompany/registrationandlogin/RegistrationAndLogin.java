@@ -197,7 +197,7 @@ public class RegistrationAndLogin {
             System.out.println("Invalid choice. Please try again.");
 }
 
-            newMessage.SentMessage(messageChoice);
+            newMessage.createMessageHash();
 
                         messageNumber++;
                     }
