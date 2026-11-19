@@ -314,6 +314,32 @@ public String checkCellPhoneNumber() {
     public static int returnTotalMessages() {
         return totalMessages;
     }
+    
+    
+ //  Display the longest sent message
+public static void displayLongestMessage() {
+
+    if (sentCount == 0) {
+        System.out.println("No sent messages available.");
+        return;
+    }
+
+    Message longestMessage = sentMessages[0];
+
+    for (int i = 1; i < sentCount; i++) {
+        if (sentMessages[i].getMessage().length()
+                > longestMessage.getMessage().length()) {
+            longestMessage = sentMessages[i];
+        }
+    }
+
+    System.out.println("\nLongest Message Details:");
+    System.out.println("Message ID: " + longestMessage.getMessageID());
+    System.out.println("Recipient: " + longestMessage.getRecipient());
+    System.out.println("Message: " + longestMessage.getMessage());
+    System.out.println("Message Hash: " + longestMessage.getMessageHash());
+}  
+
 }
 
 
