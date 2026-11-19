@@ -4,7 +4,6 @@
  */
 package com.mycompany.registrationandlogin;
 
-import java.util.Scanner;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -141,6 +140,101 @@ public class MessageTest {
                 "Message successfully stored.",
                 message.SentMessage("3")
         );
-}
+} 
+    
+    @Test
+    public void testLongestMessage() {
+
+        Message message1 = new Message(
+                "1234567893", 3,
+                "+27718693002", "Hello"
+        );
+
+        Message message2 = new Message(
+                "1234567894", 4,
+                "+27718693002",
+                "Hi Mike, can you join us for dinner tonight?"
+        );
+
+        message1.createMessageHash();
+        message2.createMessageHash();
+
+        message1.SentMessage("1");
+        message2.SentMessage("1");
+
+        assertDoesNotThrow(() -> Message.displayLongestMessage());
+    }
+
+    @Test
+    public void testSearchMessageByID() {
+
+        Message message = new Message(
+                "1234567895", 5,
+                "+27718693002", "Hello Mike"
+        );
+
+        message.createMessageHash();
+        message.SentMessage("1");
+
+        assertDoesNotThrow(() ->
+                Message.searchMessageID("1234567895")
+        );
+    }
+    @Test
+    public void testSearchMessageByRecipient() {
+
+        Message message = new Message(
+                "1234567896", 6,
+                "+27718693002", "Hello Keegan"
+        );
+
+        message.createMessageHash();
+        message.SentMessage("1");
+
+        assertDoesNotThrow(() ->
+                Message.searchRecipient("+27718693002")
+        );
+    }
+
+    @Test
+    public void testDeleteMessageByHash() {
+
+        Message message = new Message(
+                "1234567897", 7,
+                "+27718693002", "Hello again"
+        );
+
+        String hash = message.createMessageHash();
+        message.SentMessage("1");
+
+        assertDoesNotThrow(() ->
+                Message.deleteMessage(hash)
+        );
+    }
+
+    @Test
+    public void testDisplayMessageReport() {
+
+        Message message = new Message(
+                "1234567898", 8,
+                "+27718693002", "This is my report message"
+        );
+
+        message.createMessageHash();
+        message.SentMessage("1");
+
+        assertDoesNotThrow(() ->
+                Message.displayReport()
+        );
+    }
+
+    @Test
+    public void testReadStoredMessages() {
+
+        assertDoesNotThrow(() ->
+                Message.readStoredMessages()
+        );
+    }
+
 }
 

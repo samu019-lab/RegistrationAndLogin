@@ -73,6 +73,13 @@ public class RegistrationAndLogin {
             System.out.println("\n1. Send Messages");
             System.out.println("2. Show recently sent messages");
             System.out.println("3. Quit");
+            // PART 3 
+            System.out.println("4. Display stored messages");
+            System.out.println("5. Display longest message");
+            System.out.println("6. Search message by ID");
+            System.out.println("7. Search messages by recipient");
+            System.out.println("8. Delete message by hash");
+            System.out.println("9. Display full message report");
 
             System.out.print("Choose an option: ");
             String choice = scanner.nextLine();
@@ -173,7 +180,6 @@ public class RegistrationAndLogin {
                                 "Message Hash: "
                                 + newMessage.createMessageHash()
                         );
-
                         
 
       String messageChoice;
@@ -185,14 +191,6 @@ public class RegistrationAndLogin {
     System.out.println("2. Disregard Message");
     System.out.println("3. Store Message");
     
-    // PART 3 
-    System.out.println("4. Display stored messages");
-   System.out.println("5. Display longest message");
-   System.out.println("6. Search message by ID"); 
-   System.out.println("7. Search messages by recipient"); 
-   System.out.println("8. Delete message by hash");
-   System.out.println("9. Display full message report");
-   
     System.out.print("Enter your choice: ");
     messageChoice = scanner.nextLine();
  
@@ -205,7 +203,7 @@ public class RegistrationAndLogin {
             System.out.println("Invalid choice. Please try again.");
 }
 
-            newMessage.createMessageHash();
+            newMessage.SentMessage(messageChoice);
 
                         messageNumber++;
                     }

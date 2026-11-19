@@ -9,8 +9,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import com.google.gson.Gson;
-import com.google.gson.JsonSyntaxException;
 /**
  *
  * @author Samukelisiwe
@@ -409,7 +407,7 @@ public static void deleteMessage(String searchHash) {
             messageIDs[sentCount - 1] = null;
 
             sentCount--;
-
+           removeFromSentList(searchHash);
             System.out.println("Message successfully deleted.");
             return;
         }
@@ -445,68 +443,113 @@ public static void deleteMessage(String searchHash) {
 }
      
  //Read stored messages from JSON into an array
-public static void readStoredMessages() {
+    // Read stored messages from JSON into an array without external libraries
+    public static void readStoredMessages() {
+        Path filePath = Paths.get("messages.json");
 
-    Path filePath = Paths.get("messages.json");
-
-    if (!Files.exists(filePath)) {
-        System.out.println("No stored messages file found.");
-        return;
-    }
-
-    try {
-        String jsonContent = Files.readString(filePath);
-
-        Gson gson = new Gson();
-
-        Message[] loadedMessages =
-                gson.fromJson(jsonContent, Message[].class);
-
-        if (loadedMessages == null) {
-            System.out.println("No stored messages found.");
+        if (!Files.exists(filePath)) {
+            System.out.println("No stored messages file found.");
             return;
         }
 
-        storedMessages = new Message[MAX_MESSAGES];
-        storedCount = 0;
+        try {
+            String jsonContent = Files.readString(filePath).trim();
 
-        for (Message loadedMessage : loadedMessages) {
-
-            if (storedCount >= MAX_MESSAGES) {
-                System.out.println(
-                        "Storage array is full. Some messages were not loaded."
-                );
-                break;
+            if (jsonContent.isEmpty() || jsonContent.equals("[]")) {
+                System.out.println("No stored messages found.");
+                return;
             }
 
-            if (loadedMessage != null) {
-                storedMessages[storedCount] = loadedMessage;
+            storedMessages = new Message[MAX_MESSAGES];
+            storedCount = 0;
+
+            // Remove outer brackets [ ] and split each JSON object
+            String inner = jsonContent.substring(1, jsonContent.length() - 1).trim();
+            String[] objects = inner.split("\\},\\s*\\{");
+
+            for (String obj : objects) {
+                if (storedCount >= MAX_MESSAGES) {
+                    System.out.println("Storage array is full. Some messages were not loaded.");
+                    break;
+                }
+
+                String cleanObj = obj.replace("{", "").replace("}", "").trim();
+                String id = extractJsonValue(cleanObj, "messageID");
+                String numStr = extractJsonValue(cleanObj, "messageNumber");
+                String rec = extractJsonValue(cleanObj, "recipient");
+                String msg = extractJsonValue(cleanObj, "message");
+                String hash = extractJsonValue(cleanObj, "messageHash");
+
+                int msgNum = numStr.isEmpty() ? 0 : Integer.parseInt(numStr);
+                Message loaded = new Message(id, msgNum, rec, msg);
+                loaded.messageHash = hash;
+
+                storedMessages[storedCount] = loaded;
                 storedCount++;
             }
+
+            System.out.println(storedCount + " stored messages loaded from JSON.");
+
+            for (int i = 0; i < storedCount; i++) {
+                Message current = storedMessages[i];
+                System.out.println("\nMessage ID: " + current.getMessageID());
+                System.out.println("Recipient: " + current.getRecipient());
+                System.out.println("Message: " + current.getMessage());
+                System.out.println("Message Hash: " + current.getMessageHash());
+            }
+
+        } catch (IOException | NumberFormatException e) {
+            System.out.println("Error reading stored messages: " + e.getMessage());
+        }
+    }
+
+    private static String extractJsonValue(String jsonBlock, String key) {
+        String searchKey = "\"" + key + "\":";
+        int keyIndex = jsonBlock.indexOf(searchKey);
+        if (keyIndex == -1) {
+            return "";
         }
 
-        System.out.println(
-                storedCount + " stored messages loaded from JSON."
-        );
+        int valueStart = keyIndex + searchKey.length();
+        String rest = jsonBlock.substring(valueStart).trim();
 
-        // Display the loaded messages
-        for (int i = 0; i < storedCount; i++) {
-            Message current = storedMessages[i];
+        if (rest.startsWith("\"")) {
+            int endQuote = rest.indexOf("\"", 1);
+            while (endQuote > 0 && rest.charAt(endQuote - 1) == '\\') {
+                endQuote = rest.indexOf("\"", endQuote + 1);
+            }
+            return endQuote > 0 ? rest.substring(1, endQuote) : "";
+        } else {
+            int commaIndex = rest.indexOf(",");
+            return commaIndex > 0 ? rest.substring(0, commaIndex).trim() : rest.trim();
+        }
+    }
+     
+private static void removeFromSentList(String searchHash) {
 
-            System.out.println("\nMessage ID: "
-                    + current.getMessageID());
-            System.out.println("Recipient: "
-                    + current.getRecipient());
-            System.out.println("Message: "
-                    + current.getMessage());
-            System.out.println("Message Hash: "
-                    + current.getMessageHash());
+    MessageNode current = sentHead;
+    MessageNode previous = null;
+
+    while (current != null) {
+
+        if (current.data.getMessageHash().equals(searchHash)) {
+
+            if (previous == null) {
+                sentHead = current.next;
+            } else {
+                previous.next = current.next;
+            }
+
+            if (current == sentTail) {
+                sentTail = previous;
+            }
+
+            return;
         }
 
-    } catch (IOException | JsonSyntaxException e) {
-        System.out.println(
-                "Error reading stored messages: " + e.getMessage()
-        );
+        previous = current;
+        current = current.next;
     }
 }
+
 }

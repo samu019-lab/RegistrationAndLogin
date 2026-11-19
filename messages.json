@@ -61,5 +61,26 @@
   "recipient": "+27718693002",
   "message": "Hello again",
   "messageHash": ""
+},
+{
+  "messageID": "1662538533",
+  "messageNumber": 0,
+  "recipient": "+27630290517",
+  "message": "hy want food",
+  "messageHash": "16:0:HYFOOD"
+},
+{
+  "messageID": "8565573843",
+  "messageNumber": 1,
+  "recipient": "+27721227078",
+  "message": "hy want dinner tonight",
+  "messageHash": "85:1:HYTONIGHT"
+},
+{
+  "messageID": "1234567892",
+  "messageNumber": 2,
+  "recipient": "+27718693002",
+  "message": "Hello again",
+  "messageHash": "12:2:HELLOAGAIN"
 }
 ]
